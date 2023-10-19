@@ -70,9 +70,7 @@ OrderItem (Элемент заказа)
     product_id - ссылка на товар.
     quantity - количество товара в заказе.
 
-## Схема
 
-![](C:/Users/inabs/Desktop/schema.jpg)
 
 
 ### Пример выходных параметров (python main.py 10,11,14,15)
