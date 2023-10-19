@@ -1,5 +1,4 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, Boolean, DateTime, Float
-from sqlalchemy.orm import relationship
+from sqlalchemy import Boolean, DateTime
 from src.app.models import *
 
 from src.database import Base
@@ -23,6 +22,7 @@ class Product(Base):
     shelves = relationship("Shelf", secondary="product_shelf_association", back_populates="products")
     category = relationship("Category", back_populates="products")  # Добавлено отношение к категории
     ratings = relationship("Rating", back_populates="product")
+
 
 class ProductShelfAssociation(Base):
     __tablename__ = 'product_shelf_association'
@@ -50,4 +50,3 @@ class OrderItem(Base):
     order_id = Column(Integer, ForeignKey('orders.id'), nullable=False)
     product_id = Column(Integer, ForeignKey('products.id'), nullable=False)
     quantity = Column(Integer, nullable=False)
-
