@@ -4,7 +4,7 @@ import asyncio
 from sqlalchemy import select, and_
 from typing import List
 
-from src.app.models import *
+from src.app.shop_models  import *
 from src.database import async_session_maker
 
 
@@ -38,7 +38,7 @@ async def get_order(order_id: List[int]):
                 product_info = is_main_dict.get(product_id, [])
                 product_info.append({"Стеллаж": shelf_name, "product_name": product_name})
                 is_main_dict[product_id] = product_info
-        print(is_main_dict)
+
         print("=+=+=+=")
         print("Страница сборки заказов", ", ".join(map(str, order_id)))
 
@@ -57,7 +57,7 @@ async def get_order(order_id: List[int]):
                 print(f'{product_name} (id={product_id})\nзаказ {order_number}, {quantity} шт')
 
                 if additional_shelves:
-                    print("доп Стеллаж:", ",".join(additional_shelves))
+                    print("доп стеллаж:", ",".join(additional_shelves))
                 print()
 
 
@@ -70,12 +70,3 @@ if __name__ == '__main__':
     loop = asyncio.get_event_loop()
     loop.run_until_complete(main())
 
-
-async def main():
-    order = [int(order_id) for order_id in sys.argv[1].split(',')]
-    await get_order(order)
-
-
-if __name__ == '__main__':
-    loop = asyncio.get_event_loop()
-    loop.run_until_complete(main())
